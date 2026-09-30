@@ -1,6 +1,7 @@
 {
   "project_name": "",
   "created_at": "",
+  "intake": {"status": "pending", "rounds_completed": [], "synopsis_file": ""},
   "current_step": -1,
   "status": "initialized",
   "steps": {
@@ -9,8 +10,8 @@
     "2": {"name": "beat_sheet", "agent": "analyst", "status": "pending", "version": 0},
     "3": {"name": "image_system", "agent": "writer", "status": "pending", "version": 0},
     "4": {"name": "characters", "agent": "writer", "status": "pending", "version": 0},
-    "5": {"name": "scene_list", "agent": "writer", "status": "pending", "version": 0},
-    "6": {"name": "treatment", "agent": "writer", "status": "pending", "version": 0},
+    "5": {"name": "treatment", "agent": "writer", "status": "pending", "version": 0},
+    "6": {"name": "scene_list", "agent": "writer", "status": "pending", "version": 0},
     "7": {"name": "first_draft", "agent": "writer", "status": "pending", "version": 0},
     "8": {"name": "visual_revision", "agent": "critic+writer", "status": "pending", "version": 0}
   },

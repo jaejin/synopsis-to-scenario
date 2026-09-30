@@ -1,0 +1,34 @@
+{
+  "project_name": "",
+  "created_at": "",
+  "target_format": "web_novel",
+  "intake": {"status": "pending", "rounds_completed": [], "synopsis_file": ""},
+  "current_step": -1,
+  "status": "initialized",
+  "steps": {
+    "0": {"name": "critique", "agent": "analyst", "status": "pending", "version": 0},
+    "1": {"name": "series_structure", "agent": "analyst", "status": "pending", "version": 0},
+    "2": {"name": "arc_beats", "agent": "analyst", "status": "pending", "version": 0},
+    "3": {"name": "setting_bible", "agent": "writer", "status": "pending", "version": 0},
+    "4": {"name": "characters", "agent": "writer", "status": "pending", "version": 0},
+    "5": {"name": "arc_treatment", "agent": "writer", "status": "pending", "version": 0},
+    "6": {"name": "episode_plan", "agent": "writer", "status": "pending", "version": 0},
+    "7": {"name": "serial_writing", "agent": "writer", "status": "pending", "version": 0},
+    "8": {"name": "arc_revision", "agent": "critic+writer", "status": "pending", "version": 0}
+  },
+  "checkpoints": {
+    "A": {"after_step": 2, "status": "pending", "revision_count": 0, "max_revisions": 3},
+    "B": {"after_step": 4, "status": "pending", "revision_count": 0, "max_revisions": 3},
+    "C": {"after_step": 6, "status": "pending", "revision_count": 0, "max_revisions": 3},
+    "D": {"after_episode": 10, "status": "pending", "revision_count": 0, "max_revisions": 3}
+  },
+  "serial": {
+    "last_written_episode": 0,
+    "last_revised_episode": 0,
+    "requests": [],
+    "arcs": {},
+    "under_length_episodes": [],
+    "over_length_episodes": []
+  },
+  "revision_log": []
+}

@@ -11,8 +11,11 @@
 ```
 1. projects/{name}/config.yaml 읽기 → 프로젝트 설정 확인
 2. projects/{name}/state.json 읽기 → 현재 Step 확인
-3. 현재 Step이 -1이면 STEP 0부터 시작
-4. 현재 Step이 N이면 N부터 재개
+3. input/ 에 시놉시스가 없거나 intake.status 가 "in_progress" 면
+   → STEP I 시놉시스 인터뷰 제안 (prompts/intake/interview.md)
+   사용자가 직접 쓰겠다고 하면 건너뛴다
+4. 현재 Step이 -1이면 STEP 0부터 시작
+5. 현재 Step이 N이면 N부터 재개
 ```
 
 ### 2. Step 실행
@@ -145,6 +148,7 @@ STEP 8은 Critic 진단 → Writer 반영 2단계:
 ## 전체 진행 순서 요약
 
 ```
+(STEP I 시놉시스 인터뷰 — 시놉시스가 없을 때) →
 STEP 0 → STEP 1 → STEP 2 → [CKP A] →
 STEP 3 → STEP 4 → [CKP B] →
 STEP 5(트리트먼트) → STEP 6(씬 리스트) → [CKP C] →
