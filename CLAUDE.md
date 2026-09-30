@@ -187,6 +187,19 @@ STEP 7은 한 번에 쓰지 않고 4회로 분할:
 2. `projects/{name}/state.json` → current_step 확인
 3. 해당 Step부터 실행 재개
 
+### 웹소설 모드 (`target_format: web_novel`)
+
+`config.yaml` 의 `target_format` 이 `web_novel` 이면 **`prompts/webnovel/orchestrator.md` 를 따른다**.
+시나리오 모드와 에이전트 역할·체크포인트 원칙은 같고 다음이 다르다:
+
+- 분량: `web_novel.total_episodes`(기본 200)화 × 회차당 **공백 제외** `chars_per_episode`(기본 5,000)자, 허용 `char_min`~`char_max`
+- 구조: 3막 1개 → 시리즈 3막 + 아크 8~10개, 유료 전환 회차(`paywall_episode`) 설계
+- STEP 3: 이미지 시스템 → 설정집 + 떡밥 원장 / STEP 6: 씬 리스트 → 아크별 회차 플롯표
+- STEP 7: 막별 4분할 → `batch_size`(기본 10)화 배치 반복, 배치마다 `scripts/count_chars.py` 로 분량 검증
+- 체크포인트 D(1~10화 문체 확정) 추가, STEP 8은 아크가 끝날 때마다 아크 퇴고
+- 세션 재개: `state.json` 의 `serial.last_written_episode + 1` 화부터
+- 초기화: `python scripts/init_project.py <name> --format web_novel`
+
 ### 파일 경로 규칙
 
 ```
@@ -194,8 +207,10 @@ prompts/orchestrator.md              → 전체 실행 흐름
 prompts/{agent}/system.md            → 에이전트 페르소나
 prompts/{agent}/step_XX_*.md         → Step 실행 프롬프트
 prompts/critic/checkpoint_X.md       → 체크포인트 리뷰 프롬프트
+prompts/webnovel/                    → 웹소설 모드 프롬프트 (orchestrator.md, {agent}/...)
 projects/{name}/config.yaml          → 프로젝트 설정
 projects/{name}/state.json           → 진행 상태
 projects/{name}/input/               → 입력 파일
 projects/{name}/output/              → 산출물
+projects/{name}/output/episodes/     → 웹소설 회차 원고 (ep_001.md ~)
 ```

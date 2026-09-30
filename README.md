@@ -75,8 +75,16 @@ prompts/
     ├── checkpoint_b.md
     ├── checkpoint_c.md
     └── step_08_visual_revision.md
+prompts/webnovel/                    # 웹소설 모드 (아래 "웹소설 모드" 참고)
+├── orchestrator.md
+├── state_schema.json
+├── analyst/  (system, step_00_addendum, step_01_series_structure, step_02_arc_beats)
+├── writer/   (system, step_03_setting_bible ~ step_07_serial_writing)
+└── critic/   (system, checkpoint_a~c, step_08_arc_revision)
 scripts/
-├── init_project.py                  # 프로젝트 초기화
+├── init_project.py                  # 프로젝트 초기화 (--format screenplay|web_novel)
+├── count_chars.py                   # 웹소설 회차 분량 검증 (공백 제외)
+├── test_count_chars.py              # count_chars.py 단위 테스트
 └── md_to_docx.py                    # Markdown → .docx 변환
 projects/                            # 프로젝트별 작업 디렉토리 (.gitignore)
 └── {name}/
@@ -128,6 +136,40 @@ Claude Code 세션에서:
 ```bash
 pip install python-docx
 python scripts/md_to_docx.py projects/my-project/output/final_screenplay.md
+```
+
+## 웹소설 모드
+
+같은 시놉시스를 **200화 × 회차당 공백 제외 5,000자** 연재 웹소설로 확장합니다.
+
+```bash
+python scripts/init_project.py my-novel --format web_novel
+```
+
+`config.yaml` 의 `web_novel` 블록에서 총 회차, 회차 분량(허용 범위), 유료 전환 회차, 배치 크기를 조정합니다.
+
+```
+STEP 0  [Analyst]  시놉시스 사전분석 + 연재 적합성
+STEP 1  [Analyst]  시리즈 3막 · 아크 8~10개 · 유료 전환 설계
+STEP 2  [Analyst]  아크별 비트 (기승전결 + 아크 끝 절단)
+        ──── Checkpoint A: 시리즈 구조 확정 ────
+STEP 3  [Writer]   설정집 + 떡밥 원장
+STEP 4  [Writer]   캐릭터 (아크별 성장 곡선, 호칭·말투 표)
+        ──── Checkpoint B: 설정·캐릭터 확정 ────
+STEP 5  [Writer]   아크 트리트먼트
+STEP 6  [Writer]   회차 플롯표 (아크별 파일)
+        ──── Checkpoint C: 집필 전 최종 리뷰 ────
+STEP 7  [Writer]   연재 집필 — 10화 배치 × 20회, 배치마다 분량 검증
+        ──── Checkpoint D: 1~10화 문체 확정 ────
+STEP 8  [Critic → Writer]  아크가 끝날 때마다 아크 퇴고
+```
+
+원고 전체(약 100만 자)를 매번 읽지 않도록, 배치마다 **설정집 · 떡밥 원장 · 누적 요약**만 읽고 이어 씁니다.
+
+분량 검증:
+
+```bash
+python scripts/count_chars.py projects/my-novel/output/episodes/ --min 4800 --max 5500
 ```
 
 ## Theoretical Foundations
