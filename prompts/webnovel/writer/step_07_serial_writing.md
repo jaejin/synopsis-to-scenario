@@ -1,8 +1,10 @@
-# Writer — STEP 7: 연재 집필 (배치 단위)
+# Writer — STEP 7: 연재 집필 (요청 단위)
 
 ## 입력 컨텍스트
 
-이 Step은 **배치 단위**(기본 10화)로 반복한다. 매 배치마다 다음만 읽는다. **이미 쓴 원고 전체를 읽지 않는다.**
+이 Step은 **사용자가 요청한 회차만큼만** 쓰고 멈춘다 (몇 화를 쓸지는 Orchestrator가 사용자에게 받아 전달한다). 요청 범위를 넘어 다음 회차를 이어 쓰지 않는다.
+
+매 요청마다 다음만 읽는다. **이미 쓴 원고 전체를 읽지 않는다.**
 
 | 파일 | 용도 |
 |------|------|
@@ -10,9 +12,9 @@
 | `output/step_04_characters.md` | 인물·호칭·말투 |
 | `output/foreshadow_ledger.md` | 떡밥 현재 상태 |
 | `output/serial_summary.md` | 지금까지의 줄거리 |
-| `output/step_06_episode_plan/arc_XX.md` | 이번 배치 회차의 플롯표 (배치가 두 아크에 걸치면 둘 다) |
-| `output/episodes/ep_{직전}.md` | 직전 회차 전문 — 문체와 절단 이어받기 (배치 1은 없음) |
-| `output/checkpoint_d_review.md` | 확정된 문체 기준 (배치 2부터, 있으면) |
+| `output/step_06_episode_plan/arc_XX.md` | 요청 회차의 플롯표 (요청이 두 아크에 걸치면 둘 다) |
+| `output/episodes/ep_{직전}.md` | 직전 회차 전문 — 문체와 절단 이어받기 (1화는 없음) |
+| `output/checkpoint_d_review.md` | 확정된 문체 기준 (있으면) |
 
 ## 집필 절차
 
@@ -28,7 +30,7 @@
 6. output/episodes/ep_NNN.md 저장
 ```
 
-배치 전체를 쓴 뒤:
+요청 회차를 모두 쓴 뒤 (요청이 `batch_size` 를 넘으면 그 단위 묶음마다):
 
 ```
 7. 분량 검증 (config의 char_min/char_max 사용)
@@ -56,7 +58,7 @@
 - 새 고유명사: (있으면 — 설정집에도 추가했는지 표시)
 ```
 
-요약은 다음 배치의 유일한 줄거리 기억이다. 사실만 적고 평가는 쓰지 않는다.
+요약은 다음 요청의 유일한 줄거리 기억이다. 1화만 써도 반드시 추가한다. 사실만 적고 평가는 쓰지 않는다.
 
 ## 연속성 자가 점검 (저장 전, 평가가 아니라 사실 대조)
 
@@ -75,6 +77,6 @@
 
 ## 출력 파일
 
-- `projects/{name}/output/episodes/ep_NNN.md` (배치 회차 수만큼)
+- `projects/{name}/output/episodes/ep_NNN.md` (요청 회차 수만큼)
 - `projects/{name}/output/serial_summary.md` (추가)
 - `projects/{name}/output/foreshadow_ledger.md` (갱신)

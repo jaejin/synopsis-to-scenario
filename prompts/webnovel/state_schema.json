@@ -2,6 +2,7 @@
   "project_name": "",
   "created_at": "",
   "target_format": "web_novel",
+  "intake": {"status": "pending", "rounds_completed": [], "synopsis_file": ""},
   "current_step": -1,
   "status": "initialized",
   "steps": {
@@ -19,13 +20,12 @@
     "A": {"after_step": 2, "status": "pending", "revision_count": 0, "max_revisions": 3},
     "B": {"after_step": 4, "status": "pending", "revision_count": 0, "max_revisions": 3},
     "C": {"after_step": 6, "status": "pending", "revision_count": 0, "max_revisions": 3},
-    "D": {"after_batch": 1, "status": "pending", "revision_count": 0, "max_revisions": 3}
+    "D": {"after_episode": 10, "status": "pending", "revision_count": 0, "max_revisions": 3}
   },
   "serial": {
     "last_written_episode": 0,
     "last_revised_episode": 0,
-    "current_batch": 0,
-    "batches": {},
+    "requests": [],
     "arcs": {},
     "under_length_episodes": [],
     "over_length_episodes": []

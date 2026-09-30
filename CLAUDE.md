@@ -152,6 +152,8 @@ revision_targets: number[]  # Step numbers to revise
 1. `projects/{name}/config.yaml` 확인 → 프로젝트 설정 로드
 2. `projects/{name}/state.json` 확인 → 현재 진행 상태 로드
 3. `projects/{name}/input/` 에서 시놉시스 + 레퍼런스 읽기
+4. 시놉시스가 없으면 → **STEP I 시놉시스 인터뷰** (`prompts/intake/interview.md`) 제안.
+   질문에 답하는 것만으로 `input/synopsis.md` 를 만들고 config 의 제목·장르·톤·테마를 채운다
 
 ### Step 실행 방법
 
@@ -195,9 +197,9 @@ STEP 7은 한 번에 쓰지 않고 4회로 분할:
 - 분량: `web_novel.total_episodes`(기본 200)화 × 회차당 **공백 제외** `chars_per_episode`(기본 5,000)자, 허용 `char_min`~`char_max`
 - 구조: 3막 1개 → 시리즈 3막 + 아크 8~10개, 유료 전환 회차(`paywall_episode`) 설계
 - STEP 3: 이미지 시스템 → 설정집 + 떡밥 원장 / STEP 6: 씬 리스트 → 아크별 회차 플롯표
-- STEP 7: 막별 4분할 → `batch_size`(기본 10)화 배치 반복, 배치마다 `scripts/count_chars.py` 로 분량 검증
-- 체크포인트 D(1~10화 문체 확정) 추가, STEP 8은 아크가 끝날 때마다 아크 퇴고
-- 세션 재개: `state.json` 의 `serial.last_written_episode + 1` 화부터
+- STEP 7: 막별 4분할 → **사용자가 요청한 회차만 쓰고 멈춤** ("다음 5화" 등). 요청마다 `scripts/count_chars.py` 로 분량 검증, 자동 연속 집필 금지
+- 체크포인트 D(누적 10화 도달 후 문체 확정) 추가, STEP 8 아크 퇴고는 아크 끝 회차를 쓴 뒤 제안하고 요청 시 실행
+- 세션 재개: 진행 현황(`serial.last_written_episode`)을 보여 주고 몇 화를 쓸지 묻는다
 - 초기화: `python scripts/init_project.py <name> --format web_novel`
 
 ### 파일 경로 규칙
@@ -207,6 +209,7 @@ prompts/orchestrator.md              → 전체 실행 흐름
 prompts/{agent}/system.md            → 에이전트 페르소나
 prompts/{agent}/step_XX_*.md         → Step 실행 프롬프트
 prompts/critic/checkpoint_X.md       → 체크포인트 리뷰 프롬프트
+prompts/intake/interview.md          → STEP I 시놉시스 인터뷰 (두 모드 공통)
 prompts/webnovel/                    → 웹소설 모드 프롬프트 (orchestrator.md, {agent}/...)
 projects/{name}/config.yaml          → 프로젝트 설정
 projects/{name}/state.json           → 진행 상태

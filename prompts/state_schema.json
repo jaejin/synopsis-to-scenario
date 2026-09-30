@@ -1,6 +1,7 @@
 {
   "project_name": "",
   "created_at": "",
+  "intake": {"status": "pending", "rounds_completed": [], "synopsis_file": ""},
   "current_step": -1,
   "status": "initialized",
   "steps": {

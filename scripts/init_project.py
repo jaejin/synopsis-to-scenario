@@ -65,6 +65,7 @@ def init_project(project_name: str, target_format: str = "screenplay") -> None:
 다음 단계:
   1. {config_dest} 편집 → 프로젝트 설정 입력
   2. {project_dir / 'input'}/에 시놉시스 파일 배치
+     (시놉시스가 없으면 비워 두고 3번에서 "시놉시스 같이 쓰자" 라고 요청 → 질문에 답하며 작성)
   3. Claude Code 세션에서 워크플로우 시작
 """)
 

@@ -33,6 +33,7 @@
 ## Workflow Pipeline
 
 ```
+STEP I  [Orchestrator + Writer]  시놉시스 인터뷰 (선택 — 시놉시스가 없을 때)
 STEP 0  [Analyst]  시놉시스 사전분석 (비평)
 STEP 1  [Analyst]  막 구조 & 러닝타임 설계
 STEP 2  [Analyst]  비트시트 (15비트, Snyder 기반)
@@ -75,6 +76,7 @@ prompts/
     ├── checkpoint_b.md
     ├── checkpoint_c.md
     └── step_08_visual_revision.md
+prompts/intake/interview.md          # STEP I 시놉시스 인터뷰 (두 모드 공통)
 prompts/webnovel/                    # 웹소설 모드 (아래 "웹소설 모드" 참고)
 ├── orchestrator.md
 ├── state_schema.json
@@ -117,6 +119,8 @@ python scripts/init_project.py my-project
 
 `projects/my-project/config.yaml`을 편집하여 제목, 장르, 톤 등을 설정하고, `projects/my-project/input/`에 시놉시스 파일을 배치합니다.
 
+시놉시스를 직접 쓰기 어려우면 비워 두고 Claude Code 세션에서 **"시놉시스 같이 쓰자"** 라고 요청하세요. 주인공·욕망·장애물·결말 등을 선택지와 함께 몇 개씩 물어보고, 답을 모아 시놉시스 초안을 써 줍니다(STEP I, `prompts/intake/interview.md`). 제목·장르·톤·테마도 답에 맞춰 `config.yaml`에 채워집니다.
+
 ### 3. 워크플로우 실행
 
 Claude Code 세션에서:
@@ -146,7 +150,7 @@ python scripts/md_to_docx.py projects/my-project/output/final_screenplay.md
 python scripts/init_project.py my-novel --format web_novel
 ```
 
-`config.yaml` 의 `web_novel` 블록에서 총 회차, 회차 분량(허용 범위), 유료 전환 회차, 배치 크기를 조정합니다.
+`config.yaml` 의 `web_novel` 블록에서 총 회차, 회차 분량(허용 범위), 유료 전환 회차를 조정합니다.
 
 ```
 STEP 0  [Analyst]  시놉시스 사전분석 + 연재 적합성
@@ -159,12 +163,14 @@ STEP 4  [Writer]   캐릭터 (아크별 성장 곡선, 호칭·말투 표)
 STEP 5  [Writer]   아크 트리트먼트
 STEP 6  [Writer]   회차 플롯표 (아크별 파일)
         ──── Checkpoint C: 집필 전 최종 리뷰 ────
-STEP 7  [Writer]   연재 집필 — 10화 배치 × 20회, 배치마다 분량 검증
-        ──── Checkpoint D: 1~10화 문체 확정 ────
-STEP 8  [Critic → Writer]  아크가 끝날 때마다 아크 퇴고
+STEP 7  [Writer]   연재 집필 — 요청한 회차만 쓰고 멈춤 ("다음 5화 써 줘"), 요청마다 분량 검증
+        ──── Checkpoint D: 누적 10화 도달 후 1~10화 문체 확정 ────
+STEP 8  [Critic → Writer]  아크를 다 쓰면 아크 퇴고 제안 (요청 시 실행)
 ```
 
-원고 전체(약 100만 자)를 매번 읽지 않도록, 배치마다 **설정집 · 떡밥 원장 · 누적 요약**만 읽고 이어 씁니다.
+설계(STEP 0~6)는 200화 전체를 잡되, 집필은 원하시는 만큼씩만 합니다. "다음 3화", "31~35화", "이번 아크 끝까지", "15화 다시 써 줘"처럼 요청하시면 그 회차만 쓰고 멈춥니다.
+
+원고 전체(약 100만 자)를 매번 읽지 않도록, 요청마다 **설정집 · 떡밥 원장 · 누적 요약**만 읽고 이어 씁니다.
 
 분량 검증:
 
