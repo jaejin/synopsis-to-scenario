@@ -57,7 +57,9 @@ STEP 6(씬 리스트) 완료 → 체크포인트 C
 ```
 STEP 7은 4회 분할 + 1회 이음새 검토:
 
-1. writer/system.md + step_07_first_draft.md 읽기
+0. (config.style_reference.sources 가 있고 output/style_profile.md 가 없으면)
+   prompts/style/style_profile.md 로 문체 프로필 작성 → 사용자 승인 후 진행
+1. writer/system.md + step_07_first_draft.md 읽기 (+ output/style_profile.md, 있으면)
 2. 씬 리스트에서 막1 씬 추출 → 막1 집필 → act1.md 저장
 3. 막1 요약 생성 → 막2a 집필 → act2a.md 저장
 4. 막1+2a 요약 → 막2b 집필 → act2b.md 저장

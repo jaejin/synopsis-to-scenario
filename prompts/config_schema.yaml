@@ -35,6 +35,15 @@ synopsis_file: ""            # 시놉시스 파일명 (input/ 내)
 reference_files: []          # 작법 레퍼런스 파일명 목록 (input/references/ 내)
   # 예: ["screenplay_theory.md", "touch_screenplay.docx"]
 
+style_reference:             # 문체를 빌려 올 원전 (선택). sources 가 비어 있으면 기본 문체 원칙만 따른다
+  sources: []                # 예: [{author: "채만식", work: "레디메이드 인생", apply_to: [narration, inner]}]
+    # apply_to: narration(서술·대지문 톤) | inner(내면 서술) | dialogue(대사, 인물명 지정 가능) | action(시나리오 지문)
+  intensity: medium          # light(어휘·리듬) | medium(+서술자 논평·비유) | strong(+문장 구조, 시나리오 비권장)
+  keep: []                   # 꼭 가져올 특징 (예: ["서술자의 비꼬는 논평", "판소리 사설조 리듬"])
+  avoid: []                  # 가져오지 않을 특징 (예: ["1930년대 어휘", "한자어 과다"])
+  excerpt_files: []          # 원문 발췌 파일 (input/references/style/ 내) — 없으면 기억 기반 분석으로 표시된다
+  # 첫 집필 전에 prompts/style/style_profile.md 로 output/style_profile.md 를 만들고 사용자 승인을 받는다
+
 # ─────────────────────────────────────────────
 # web_novel 전용 설정 (target_format: web_novel 일 때만 사용)
 # ─────────────────────────────────────────────

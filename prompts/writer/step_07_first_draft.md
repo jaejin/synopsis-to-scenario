@@ -8,6 +8,7 @@
 - `projects/{name}/output/step_05_treatment.md` — 트리트먼트
 - `projects/{name}/output/step_03_image_system.md` — 이미지 시스템
 - `projects/{name}/output/step_04_characters.md` — 캐릭터
+- `projects/{name}/output/style_profile.md` — 고전 문체 차용 규칙 (있으면)
 
 **막별 (해당 막의 씬만 참조한다)**:
 - `projects/{name}/output/step_06_scene_list.md` — 해당 막의 씬 리스트

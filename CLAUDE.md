@@ -199,6 +199,7 @@ STEP 7은 한 번에 쓰지 않고 4회로 분할:
 - STEP 3: 이미지 시스템 → 설정집 + 떡밥 원장 / STEP 6: 씬 리스트 → 아크별 회차 플롯표
 - STEP 7: 막별 4분할 → **사용자가 요청한 회차만 쓰고 멈춤** ("다음 5화" 등). 요청마다 `scripts/count_chars.py` 로 분량 검증, 자동 연속 집필 금지
 - 체크포인트 D(누적 10화 도달 후 문체 확정) 추가, STEP 8 아크 퇴고는 아크 끝 회차를 쓴 뒤 제안하고 요청 시 실행
+- 고전 문체 차용: `config.style_reference` 가 있으면 첫 집필 전 `prompts/style/style_profile.md` 로 `output/style_profile.md` 작성 → 사용자 승인 (시나리오 모드도 동일)
 - 세션 재개: 진행 현황(`serial.last_written_episode`)을 보여 주고 몇 화를 쓸지 묻는다
 - 초기화: `python scripts/init_project.py <name> --format web_novel`
 
@@ -210,6 +211,7 @@ prompts/{agent}/system.md            → 에이전트 페르소나
 prompts/{agent}/step_XX_*.md         → Step 실행 프롬프트
 prompts/critic/checkpoint_X.md       → 체크포인트 리뷰 프롬프트
 prompts/intake/interview.md          → STEP I 시놉시스 인터뷰 (두 모드 공통)
+prompts/style/style_profile.md       → 고전 문체 차용 프로필 (두 모드 공통, config.style_reference 있을 때 첫 집필 전)
 prompts/webnovel/                    → 웹소설 모드 프롬프트 (orchestrator.md, {agent}/...)
 projects/{name}/config.yaml          → 프로젝트 설정
 projects/{name}/state.json           → 진행 상태

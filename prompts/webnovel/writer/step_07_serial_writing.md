@@ -15,6 +15,7 @@
 | `output/step_06_episode_plan/arc_XX.md` | 요청 회차의 플롯표 (요청이 두 아크에 걸치면 둘 다) |
 | `output/episodes/ep_{직전}.md` | 직전 회차 전문 — 문체와 절단 이어받기 (1화는 없음) |
 | `output/checkpoint_d_review.md` | 확정된 문체 기준 (있으면) |
+| `output/style_profile.md` | 고전 문체 차용 규칙 (있으면 — 사용자 승인된 것만) |
 
 ## 집필 절차
 
